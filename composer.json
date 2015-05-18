@@ -7,11 +7,12 @@
             "email": "653069653@qq.com"
         }
     ],
+    "license": "MIT",
     "minimum-stability": "dev",
     "require": {},
     "autoload": {
       "psr-4": {
-        "yuanchao\\laravel-5-markdown-editor\\":"src/"
+        "YuanChao\\Editor\\":"src/"
       }
     }
 }
