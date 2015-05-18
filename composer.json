@@ -1,0 +1,17 @@
+{
+    "name": "yuanchao/laravel-5-markdown-editor",
+    "description": "Based on the markdown editor laravel 5",
+    "authors": [
+        {
+            "name": "yuanchao",
+            "email": "653069653@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+      "psr-4": {
+        "yuanchao\\laravel-5-markdown-editor\\":"src/"
+      }
+    }
+}
