@@ -160,7 +160,7 @@
 
 .CodeMirror {
   height: auto;
-  min-height: 420px;
+  /*min-height: 420px;*/
   padding: 0; }
   .CodeMirror .CodeMirror-scroll {
     height: 100%;
