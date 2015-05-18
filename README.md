@@ -3,6 +3,8 @@ Based on the markdown editor laravel 5
 
 一个基于 laravel 5 的markdown 编辑器
 
+本项目基于 html&js 一个有情怀的编辑器二次开发完成 [传送门](https://github.com/Integ/BachEditor)
+
 # 不需要敲语法可界面操作的功能
 1. 加粗字体
 2. 加斜字体
@@ -16,6 +18,10 @@ Based on the markdown editor laravel 5
 10. 撤销
 11. 重做
 12. 全屏
+
+# Bug 反馈&交流
+
+欢迎加入我们的 laravel 学习小组：`365969825`
 
 # 预览
 <img src="http://www.phpcto.org/tmp/m1.jpg" width = "400" height = "200"  align=center />
