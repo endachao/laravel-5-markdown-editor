@@ -678,7 +678,6 @@ $(function() {
     <li rel="image"><a href="#editorHelpImage" role="tab" data-toggle="tag">图片</a></li>\
     <li rel="split"><a href="#editorHelpSplit" role="tab" data-toggle="tag">换行 / 分隔符</a></li>\
     <li rel="list"><a href="#editorHelpList" role="tab" data-toggle="tag">列表 / 引用</li></a>\
-    <li class="pull-right"><a href="http://segmentfault.com/q/1010000000187808" target="_blank">高级技巧</a></li>\
     </ul>\
 \
 <div class="tab-content">\
