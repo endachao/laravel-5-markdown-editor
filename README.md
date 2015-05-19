@@ -28,6 +28,12 @@ Based on the markdown editor laravel 5
 
 <img src="http://www.phpcto.org/tmp/m2.jpg" width = "300" height = "200"  align=center />
 
+# Update Log
+
+`2015-05-19` 初版提交
+
+`2015-05-20`  图片上传移植到扩展内部处理
+
 # Installation
 
 1.在 `composer.json` 的 require里 加入
@@ -72,42 +78,27 @@ Based on the markdown editor laravel 5
 
 这个时候，编辑器就出来啦～
 
+#### 图片上传移植到扩展内部处理
+
+`图片上传移植到扩展的功能上传时间为 2015-05-19 10:40 如果在这个时间前安装的朋友，请先更新`
+
 2.图片上传配置，打开config/editor.php 配置文件，修改里面的 `uploadUrl` 配置项，为你的处理上传的 action 
 
 我的上传 action 代码为
 
 ```
+use EndaEditor;
+
 public function postUpload(){
 
-        $data = array();
-        // 文件上传
-        if (Request::hasFile('image')){
-            $pic = Request::file('image');
-            if($pic->isValid()){
-                $newName = md5(rand(1,1000).$pic->getClientOriginalName()).".".$pic->getClientOriginalExtension();
-                $pic->move('uploads',$newName);
-                $url = asset('uploads'.'/'.$newName);
-                $data = array(
-                    'status'=>0,
-                    'message'=>'',
-                    'url'=>$url
-                );
-            }
-        }else{
-            $data = array(
-                'status'=>1,
-                'message'=>'未选择文件',
-                'url'=>''
-            );
-        }
 
-        return json_encode($data);
-    }
+		// endaEdit 为你 public 下的目录 update 2015-05-19
+        $data = EndaEditor::uploadImgFile('endaEdit');
+
+        return json_encode($data);            
+}
 
 
 ```
 
-可以看到，上传图片处理完以后，返回一个 `json` 字符串，里面必须有 `status` 参数，0为成功，如果上传成功，必须给 `url` 字段赋值为图片的地址
-
 ###完成以上这些配置，你就可以在线插入图片啦
-
