@@ -55,4 +55,15 @@ class EndaEditor{
         return $data;
     }
 
+
+    /**
+     * 转换 mark 文本
+     * @param $markdownText
+     * @return string
+     */
+    public static function MarkDecode($markdownText){
+        $parsedown = new \YuanChao\Editor\Parsedown();
+        return $parsedown->text($markdownText);
+    }
+
 }

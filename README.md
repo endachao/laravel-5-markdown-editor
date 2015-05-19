@@ -34,6 +34,8 @@ Based on the markdown editor laravel 5
 
 `2015-05-19`  图片上传移植到扩展内部处理
 
+`2015-05-19`  新增解析 markdown 为 html 功能
+
 # Installation
 
 1.在 `composer.json` 的 require里 加入
@@ -102,3 +104,32 @@ public function postUpload(){
 ```
 
 ###完成以上这些配置，你就可以在线插入图片啦
+
+
+### 新增解析 markdown 为 html 功能
+
+头部引用文件
+```
+use EndaEditor;
+
+```
+
+列子如下：
+```
+
+        $art = Article::find(16);
+
+
+        return view('test',[
+            'content'=>EndaEditor::MarkDecode($art->content)
+        ]);
+        
+        
+```
+
+直接把需要解析的 markdown 扔进这个方法就行
+
+```
+EndaEditor::MarkDecode("#我是参数")
+
+```
