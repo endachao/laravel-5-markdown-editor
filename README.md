@@ -30,9 +30,9 @@ Based on the markdown editor laravel 5
 
 # Update Log
 
-`2015-05-19` 初版提交
+`2015-05-18` 初版提交
 
-`2015-05-20`  图片上传移植到扩展内部处理
+`2015-05-19`  图片上传移植到扩展内部处理
 
 # Installation
 
