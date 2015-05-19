@@ -224,58 +224,58 @@ $(function() {
                     highLight($('.editor-preview-active.onlive'));
                 }, 500);
             }
-            // 用户第一次输入@时
-            if(!isAtting) {
-                if(c.text[0] === '@' && c.origin === '+input') {
-                    isAtting = true;
-                    if($('#atwho').length === 0) {  //之前没有at过
-                        var temp = '<ul id="atwho" class="dropdown-menu"></ul>';
-                        $('.editor').append(temp);
-                        editorAt('');
-                        $('#atwho').delegate('a', 'click', function(e) {
-                            e.preventDefault();
-                            isAtting = false;
-                            var curLine = cm.getCursor().line;
-                            var curCh = cm.getCursor().ch;
-                            var userName = $(this).parent('li').data('value');
-                            var atCh = cm.getRange({line: curLine, ch: 0}, {line: curLine, ch: curCh}).lastIndexOf('@');    //最后一个@的位置
-                            cm.replaceRange(userName + ' ', {line: curLine, ch: atCh + 1}, {line: curLine, ch: curCh});
-                            cm.focus();
-                            $('#atwho').html('').hide();
-                            query = '';     //最后清掉query
-                        });
-                    } else {    //已经at过
-                        // $('#atwho').html('').hide();
-                        editorAt('');
-                    }
-                }
-            } else if(isAtting) {
-                // 用户@中输入空格时
-                if(c.origin === '+input' && c.text[0] === ' ') {   // 用户输入空格或@
-                    isAtting = false;   // 退出at状态
-                    query = '';
-                    $('#atwho').html('').hide();
-                } else if(c.origin === '+input' && c.text[0] === '@') {   // 用户输入@
-                    isAtting = false;   // 退出at状态
-                    query = '';
-                    // $('#atwho').html('').hide();
-                    editorAt(query);
-                } else if(c.origin === '+input') {    // at中输入其他字符
-                    isAtting = true;   // at状态
-                    query += c.text[0];
-                    editorAt(query);
-                } else if(c.origin === '+delete') {
-                    if(c.removed[0] !== '@') {      //删除非@
-                        isAtting = true;   // at状态
-                        query = query.slice(0, -1);
-                        editorAt(query);
-                    } else {    // 删除@
-                        isAtting = false;
-                        query = '';
-                        $('#atwho').html('').hide();
-                    }
-                }
-            }
+            // 用户第一次输入@时 todo 暂时注释 @ 功能
+            //if(!isAtting) {
+            //    if(c.text[0] === '@' && c.origin === '+input') {
+            //        isAtting = true;
+            //        if($('#atwho').length === 0) {  //之前没有at过
+            //            var temp = '<ul id="atwho" class="dropdown-menu"></ul>';
+            //            $('.editor').append(temp);
+            //            editorAt('');
+            //            $('#atwho').delegate('a', 'click', function(e) {
+            //                e.preventDefault();
+            //                isAtting = false;
+            //                var curLine = cm.getCursor().line;
+            //                var curCh = cm.getCursor().ch;
+            //                var userName = $(this).parent('li').data('value');
+            //                var atCh = cm.getRange({line: curLine, ch: 0}, {line: curLine, ch: curCh}).lastIndexOf('@');    //最后一个@的位置
+            //                cm.replaceRange(userName + ' ', {line: curLine, ch: atCh + 1}, {line: curLine, ch: curCh});
+            //                cm.focus();
+            //                $('#atwho').html('').hide();
+            //                query = '';     //最后清掉query
+            //            });
+            //        } else {    //已经at过
+            //            // $('#atwho').html('').hide();
+            //            editorAt('');
+            //        }
+            //    }
+            //} else if(isAtting) {
+            //    // 用户@中输入空格时
+            //    if(c.origin === '+input' && c.text[0] === ' ') {   // 用户输入空格或@
+            //        isAtting = false;   // 退出at状态
+            //        query = '';
+            //        $('#atwho').html('').hide();
+            //    } else if(c.origin === '+input' && c.text[0] === '@') {   // 用户输入@
+            //        isAtting = false;   // 退出at状态
+            //        query = '';
+            //        // $('#atwho').html('').hide();
+            //        editorAt(query);
+            //    } else if(c.origin === '+input') {    // at中输入其他字符
+            //        isAtting = true;   // at状态
+            //        query += c.text[0];
+            //        editorAt(query);
+            //    } else if(c.origin === '+delete') {
+            //        if(c.removed[0] !== '@') {      //删除非@
+            //            isAtting = true;   // at状态
+            //            query = query.slice(0, -1);
+            //            editorAt(query);
+            //        } else {    // 删除@
+            //            isAtting = false;
+            //            query = '';
+            //            $('#atwho').html('').hide();
+            //        }
+            //    }
+            //}
         });
 
         var _dragText = false;
