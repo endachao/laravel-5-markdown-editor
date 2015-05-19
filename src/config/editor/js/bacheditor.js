@@ -1498,7 +1498,8 @@ $(document).ready(function () {\n\
             var lastLine = cm.getLine(cm.lineCount() - 1);    //最后一行的内容
             var reg = /^\s*\[(\d+)\]:/;    //获取最后一行计数值的正则
             var regResult = reg.exec(lastLine);    //缓存正则结果
-            var i = 1;    //计数默认为1
+            //var i = 1;    //计数默认为1
+            var i = Math.random();    //计数默认为1
             var replaceText = '![' + selectText + ']' + '[' + i + ']';
             var tailText = '\n\n  [' + i + ']: ' + imgLink;    //最后追加
             if (regResult) {    //有插入过链接或图片
