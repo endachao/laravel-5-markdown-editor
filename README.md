@@ -5,6 +5,15 @@ Based on the markdown editor laravel 5
 
 本项目基于 html&js 一个有情怀的编辑器二次开发完成 [传送门](https://github.com/Integ/BachEditor)
 
+
+# 安装使用详细教程
+
+phphub: [https://phphub.org/topics/853](https://phphub.org/topics/853)
+
+如果访问 phphub 比较慢的同学，可以访问这个
+
+SegmentFault:[http://segmentfault.com/a/1190000002780158](http://segmentfault.com/a/1190000002780158)
+
 # 不需要敲语法可界面操作的功能
 1. 加粗字体
 2. 加斜字体
