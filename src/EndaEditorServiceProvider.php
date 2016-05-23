@@ -17,13 +17,13 @@ class EndaEditorServiceProvider extends ServiceProvider {
 
         $this->publishes([
             __DIR__.'/config/views' => base_path('resources/views/vendor/editor'),
-        ]);
+        ],'EndaEditor');
         $this->publishes([
             __DIR__.'/config/editor' => base_path('public/plugin/editor'),
-        ]);
+        ],'EndaEditor');
         $this->publishes([
             __DIR__.'/config/editor.php' => config_path('editor.php'),
-        ]);
+        ],'EndaEditor');
 	}
 
 	/**

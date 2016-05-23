@@ -1148,6 +1148,7 @@ class Parsedown
                 'attributes' => array(
                     'src' => $Link['element']['attributes']['href'],
                     'alt' => $Link['element']['text'],
+                    'data-action' => 'zoom',
                     'style' => 'max-width:100%',
                 ),
             ),
