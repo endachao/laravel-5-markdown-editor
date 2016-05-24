@@ -67,7 +67,7 @@ SegmentFault:[http://segmentfault.com/a/1190000002780158](http://segmentfault.co
 
 ```
 
-5.执行 `php artisan vendor:publish`
+5.执行 `php artisan vendor:publish --tag=EndaEditor`
 
 执行完上面的命令后，会生成配置文件和视图文件到你的 config/ 和 views/vendor 目录
 
@@ -146,5 +146,13 @@ use EndaEditor;
 
 ```
 EndaEditor::MarkDecode("#我是参数")
+
+```
+
+为了保证图片的显示正常，加入[zoom插件](https://github.com/fat/zoom.js)
+
+在需要解码的页面确保引入了bootstrap，并加入如下代码
+```
+@include('editor::decode')
 
 ```
