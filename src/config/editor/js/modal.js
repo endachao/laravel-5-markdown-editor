@@ -49,7 +49,7 @@ function sfModal(option) {
             $('.sfmodal').modal('hide');
         },
         show       : function() {},
-        // 不明原因shown不触发
+        // 不明原因shown不触发(这个问题不知道这样解决是不是正确的，看下面×处)
         shown      : function() {},
         hide       : function() {},
         hidden     : function() {},
@@ -89,10 +89,12 @@ function sfModal(option) {
     } else {
         $('.sfmodal .sfModal-content').html(OPT.content);
     }
-    $('.sfmodal').modal({keyboard: true});
+    //× 文档上面写的是.modal('show')会在触发shown.bs.modal之前返回
+    //所以我直接在这一句绑定事件,shown就有效果了
+    //  参考 http://v3.bootcss.com/javascript/#modalshow
     $('.sfmodal')
-        .on('show.bs.modal'  , OPT.show)
         .on('shown.bs.modal' , OPT.shown)
+        .on('show.bs.modal'  , OPT.show)
         .on('hide.bs.modal'  , function(e) {
             OPT.hide(e);
             if(OPT.wrapper) {
@@ -101,7 +103,22 @@ function sfModal(option) {
         })
         .on('hidden.bs.modal', OPT.hidden)
         .on('loaded.bs.modal', OPT.loaded)
-        .modal('show');     // 一定要先绑事件，然后再show
+        .modal({
+            keyboard: true,
+            show:true,
+        });
+    // $('.sfmodal')
+    //     .on('shown.bs.modal' , OPT.shown)
+    //     .on('show.bs.modal'  , OPT.show)
+    //     .on('hide.bs.modal'  , function(e) {
+    //         OPT.hide(e);
+    //         if(OPT.wrapper) {
+    //             $('.modal-backdrop').remove();
+    //         }
+    //     })
+    //     .on('hidden.bs.modal', OPT.hidden)
+    //     .on('loaded.bs.modal', OPT.loaded)
+    //     .modal('show');     // 一定要先绑事件，然后再show
     $('.sfmodal .done-btn').click(function(e) {
         OPT.doneFn(e);
         if(OPT.wrapper) {

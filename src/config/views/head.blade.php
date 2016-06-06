@@ -15,6 +15,7 @@
 <script type="text/javascript" src="{{ asset('plugin/editor/js/fileupload.js') }}"></script>
 <script type="text/javascript" src="{{ asset('plugin/editor/js/bacheditor.js') }}"></script>
 <meta name="csrf-token" content="{{ csrf_token() }}" />
+<script type="text/javascript" src="{{ asset('plugin/editor/js/bootstrap3-typeahead.js') }}"></script>
 
 <script>
     $.ajaxSetup({
@@ -25,7 +26,14 @@
 
     $(function() {
         url = "{{ url(config('editor.uploadUrl')) }}";
-        var myEditor = new Editor(url);
+
+        @if(config('editor.ajaxTopicSearchUrl',null))
+        ajaxTopicSearchUrl = "{{ url(config('editor.ajaxTopicSearchUrl')) }}";
+        @else
+        ajaxTopicSearchUrl = null;
+        @endif
+
+        var myEditor = new Editor(url,ajaxTopicSearchUrl);
         myEditor.render('#myEditor');
     });
 </script>

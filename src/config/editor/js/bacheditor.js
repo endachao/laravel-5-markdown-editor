@@ -16,11 +16,12 @@ $(function() {
 
     Editor.prototype.uploadPath = '';
     Editor.prototype.token = '';
+    Editor.prototype.ajaxTopicSearchUrl = '';
 
     /**
      * Interface of Editor.
      */
-    function Editor(url) {
+    function Editor(url,ajaxTopicSearchUrl) {
         //使用默认参数
         var options =  $.extend({
             toolbar: Editor.toolbar,
@@ -29,6 +30,7 @@ $(function() {
         }, options);
         this.options = options;
         Editor.prototype.uploadPath = url;
+        Editor.prototype.ajaxTopicSearchUrl = ajaxTopicSearchUrl;
     }
     window.Editor = Editor;
 
@@ -1436,16 +1438,51 @@ $(document).ready(function () {\n\
     function drawLink(editor) {
         var cm = editor.codemirror;
         var _isFull = document.isfullScreen || document.mozFullScreen || document.webkitIsFullScreen;
+        var map;
         sfModal({
             title: '插入链接',
-            content: '<input type="text" id="editorLinkText" class="form-control text-28" placeholder="请输入链接地址">',
+            content: '<input type="text" id="editorLinkTitle" class="form-control text-28" placeholder="请输入标题"> \
+                        <input type="text" id="editorLinkText" class="form-control text-28" placeholder="请输入链接地址">',
             closeText: '取消',
             wrapper: _isFull ? '.editor' : null,
             doneText: '插入',
+            shown: function () {
+                //如果有选中的字符串，并且配置了文章搜索url就显示标题栏
+                if(!cm.getSelection() && Editor.prototype.ajaxTopicSearchUrl){
+                    $('#editorLinkTitle').typeahead({
+                        source:function(query, process){
+                            if(!Editor.prototype.ajaxTopicSearchUrl){
+                                return;
+                            }
+
+                            //ajax获取文章标题和url 数据格式为：
+                            //{'title':'url','title2':'url2'}
+                            $.get(Editor.prototype.ajaxTopicSearchUrl,{query:query},function(data){
+                                var item=[];
+                                for(var k in data){
+                                    item.push(k);
+                                }
+                                item.reverse();
+
+                                console.log(item);
+
+                                map = data;
+
+                                process(item);
+                            });
+                        },
+                        afterSelect:function(item){
+                            $('#editorLinkText').val(map[item]);
+                        }
+                    });
+                }else{
+                    $('#editorLinkTitle').addClass('hidden');
+                }
+            },
             doneFn: function() {
                 var startCursor = cm.getCursor('from');    //光标位置
                 var endCursor = cm.getCursor('to');    //选择结束位置
-                var selectText = cm.getSelection();    //当前选中的文本
+                var selectText = cm.getSelection()?cm.getSelection():$('#editorLinkTitle').val();    //当前选中的文本
                 var link = $('#editorLinkText').val();    //插入的链接地址
                 var lastLine = cm.getLine(cm.lineCount() - 1);    //最后一行的内容
                 var reg = /^\s*\[(\d+)\]:/;    //获取最后一行计数值的正则
