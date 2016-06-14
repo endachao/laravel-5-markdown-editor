@@ -57,12 +57,42 @@ class EndaEditor{
 
 
     /**
+     * Set the Validator instance resolver.
+     *
+     * @param  \Closure  $resolver
+     * @return void
+     */
+    public function resolver(Closure $resolver)
+    {
+        $this->resolver = $resolver;
+    }
+
+    /**
+     * Resolve a new Validator instance.
+     *
+     * @param  array  $data
+     * @param  array  $rules
+     * @param  array  $messages
+     * @param  array  $customAttributes
+     * @return \Illuminate\Validation\Validator
+     */
+    protected function resolve()
+    {
+        if (is_null($this->resolver))
+        {
+            return new \YuanChao\Editor\Parsedown();
+        }
+
+        return call_user_func($this->resolver);
+    }
+
+    /**
      * 转换 mark 文本
      * @param $markdownText
      * @return string
      */
-    public static function MarkDecode($markdownText){
-        $parsedown = new \YuanChao\Editor\Parsedown();
+    public function MarkDecode($markdownText){
+        $parsedown = $this->resolve();
         return $parsedown->text($markdownText);
     }
 
